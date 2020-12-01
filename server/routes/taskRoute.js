@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const TaskController = require('../controllers/taskController')
-
+const authentication = require('../middleware/authentication')
+const authorization = require('../middleware/authorization')
 router.get('/', TaskController.getTask)
 router.post('/', TaskController.createTask)
 router.get('/:id', TaskController.getById)
