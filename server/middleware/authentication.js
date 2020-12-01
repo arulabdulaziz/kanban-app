@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
         res.status(400).json(`you must login first`)
     }else{
         try {
-            const decoded = await Jwt.Verify(token)
+            const decoded = await Jwt.Verify(token, process.env.secret)
             if (!decoded) {
                 throw {
                     status: 400,
