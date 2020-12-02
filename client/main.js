@@ -63,6 +63,11 @@ var app = new Vue({
                 this.userRegister.email = ''
                 this.userRegister.password = ''
             })
+        },
+        logout(){
+            console.log(`logout ok`);
+            localStorage.removeItem('access_token')
+            this.pageName = 'Login Page'
         }
     }, 
     created: function(){
