@@ -42,7 +42,7 @@ class UserController{
             res.status(200).json({name: value.name, email: value.email})
         })
         .catch(error => {
-            res.status(500).json(value)
+            next(error)
         })
     }
 }

@@ -22,7 +22,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     }},
     description: DataTypes.STRING,
-    category: DataTypes.STRING
+    category: {type: DataTypes.STRING,
+    validate: {
+      isIn: {
+        args: [['backlog', 'todo', 'doing', 'done']],
+        msg: "Category Invalid"
+      }
+    }}
   }, {
     sequelize,
     modelName: 'Task',

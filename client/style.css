@@ -1,7 +1,10 @@
-*{
-    margin: 0px;
-    padding: 0px;
+.card {
+  width: 100%;
+  margin-top: 10px;
 }
-h1{
-    text-align: center;
+
+#navbar {
+  margin-bottom: 70px;
 }
+
+/*# sourceMappingURL=style.css.map */
