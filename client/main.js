@@ -41,7 +41,28 @@ var app = new Vue({
             })
         },
         register(){
-            
+            axios({
+                url : "http://localhost:3000/user/register",
+                method : "post",
+                data : this.userRegister
+            })
+            .then(value => {
+                swal({
+                    text: "Register Success",
+                    title: "Please Login Now",
+                    icon: "success",
+                  });
+                  this.pageName = 'Login Page'
+            })
+            .catch(error => {
+                swal("Error", `${error}`);
+                this.pageName = 'Register Page'
+            })
+            .finally(() => {
+                this.userRegister.name = ''
+                this.userRegister.email = ''
+                this.userRegister.password = ''
+            })
         }
     }
   })
