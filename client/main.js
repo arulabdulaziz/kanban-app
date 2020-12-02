@@ -29,7 +29,7 @@ var app = new Vue({
                     title: "Welcome",
                     icon: "success",
                   });
-                  localStorage.setItem('access_token', value)
+                  localStorage.setItem('access_token', value.data)
                   this.pageName = 'Main Page'
             })
             .catch(error => {
@@ -64,6 +64,13 @@ var app = new Vue({
                 this.userRegister.password = ''
             })
         }
-    }
+    }, 
+    created: function(){
+        if(localStorage.getItem('access_token')){
+          this.pageName = 'Main Page'
+        }else {
+            this.pageName = 'Login Page'
+        }
+      },
   })
   
