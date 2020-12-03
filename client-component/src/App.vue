@@ -9,7 +9,8 @@
      <div v-else-if="pageName == 'Main Page'">
          <MainPage @logout="logout"
          @addTask="addTask"
-         :tasks="tasks"></MainPage>
+         :tasks="tasks"
+         @getAllTask="getAllTask"></MainPage>
      </div>
   </div>
 </template>
@@ -108,7 +109,7 @@ export default {
                     title: "Success!!",
                     icon: "success",
                   });
-                  
+                  this.pageName = 'Main Page'
           })
           .catch(error => {
               swal("Error", `${error}`);
@@ -174,8 +175,8 @@ export default {
   },
   created: function(){
         if(localStorage.getItem('access_token')){
-          this.pageName = 'Main Page'
           this.getAllTask()
+          this.pageName = 'Main Page'
         }else {
             this.pageName = 'Login Page'
         }
