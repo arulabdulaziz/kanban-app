@@ -1,9 +1,10 @@
 const {Task} = require('../models/index')
 module.exports = async (req, res, next) => {
-    const id = req.params.id
+    const id = +req.params.id
+    console.log(`masukk`);
     try {
         const task = await Task.findOne({where: {
-            id
+            id: id
         }})
         if (task.UserId == req.loginUser.id) {
             next()

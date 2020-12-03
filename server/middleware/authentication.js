@@ -1,7 +1,7 @@
 const Jwt = require('../helper/jwt')
 module.exports = async (req, res, next) => {
     const token = req.headers.access_token
-    if (token) {
+    if (!token) {
         res.status(400).json(`you must login first`)
     }else{
         try {
@@ -13,6 +13,7 @@ module.exports = async (req, res, next) => {
                 }
             }else{
                 req.loginUser = decoded
+                next()
             }
         } catch (error) {
             next(error)

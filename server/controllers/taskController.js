@@ -1,6 +1,7 @@
 const {User, Task} = require('../models/index')
 class TaskController{
     static createTask(req, res, next){
+        console.log(req.loginUser);
         const obj = {
             title: req.body.title,
             description: req.body.description,
@@ -105,6 +106,7 @@ class TaskController{
     }
     static getById(req, res, next){
         const id = +req.params.id
+        console.log(id, '<<<<<<<<<<<<');
         Task.findByPk(id,{
             include: [User]
         })

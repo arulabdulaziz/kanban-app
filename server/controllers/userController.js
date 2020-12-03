@@ -16,7 +16,7 @@ class UserController{
                     message: `invalid account`
                 }
             }else if(Bcrypt.compare(password, value.password)){
-                const token = Jwt.Sign({name: value.name, email: value.email})
+                const token = Jwt.Sign({name: value.name, email: value.email, id: value.id})
                 res.status(200).json(token)
             }else{
                 throw {
