@@ -26,21 +26,29 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2" id="btn-submit-todo">Add Kanban</button>
       </form>
+      <!-- <ul>
+          <li v-for="(task, index) in tasks" :key="index">{{task}}</li>
+      </ul> -->
+    <Category v-for="(category, index) in categories" :key="index" :categoryTask="category" :tasks="tasks"></Category>
   </div>
 </template>
 
 <script>
+import Category from './category'
 import Navbar from './navbar'
 export default {
     name: 'Main Page',
     components: {
-        Navbar
+        Navbar,
+        Category
     },
+    props: ['tasks'],
     data(){
         return {
             title: '',
             description: '',
-            category: ''
+            category: '',
+            categories: ['backlog', 'todo', 'doing', 'done']
         }
     },
     methods: {
@@ -58,7 +66,7 @@ export default {
             this.description = '',
             this.category = ''
             this.$emit('addTask', obj)
-        }
+        },
     },
     created: function(){
 

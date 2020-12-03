@@ -8,7 +8,8 @@
       </div>
      <div v-else-if="pageName == 'Main Page'">
          <MainPage @logout="logout"
-         @addTask="addTask"></MainPage>
+         @addTask="addTask"
+         :tasks="tasks"></MainPage>
      </div>
   </div>
 </template>
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       message: 'Hello world',
-      pageName: 'Login Page'
+      pageName: 'Login Page',
+      tasks: []
     };
   },
   methods: {
@@ -85,6 +87,10 @@ export default {
       logout(){
           console.log(`logout from app`);
           localStorage.removeItem('access_token')
+          var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
           this.pageName = 'Login Page'
       },
       addTask(obj){
@@ -134,7 +140,7 @@ export default {
               url: `http://localhost:3000/${id}`,
               method: 'delete',
               headers: {
-                  access_token: localStorage.getItem('access_token')
+                access_token: localStorage.getItem('access_token')
               }
           })
           .then(value => {
@@ -147,11 +153,29 @@ export default {
           .catch(error => {
               swal("Error", `${error}`);
           })
+      },
+      getAllTask(){
+          axios({
+              url: 'http://localhost:3000/tasks',
+              method: 'GET',
+              headers: {
+                 access_token: localStorage.getItem('access_token')
+              }
+          })
+          .then(value => {
+            //   console.log(value.data, '<<<<<<<');
+              this.tasks = value.data
+            //   console.log(this.task, '<<<<< task');
+          })
+          .catch(error => {
+              console.log(error);
+          })
       }
   },
   created: function(){
         if(localStorage.getItem('access_token')){
           this.pageName = 'Main Page'
+          this.getAllTask()
         }else {
             this.pageName = 'Login Page'
         }

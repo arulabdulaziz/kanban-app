@@ -50,6 +50,25 @@ export default {
                 password: this.password
             }
             this.$emit('login', obj)
+        },
+        onSignIn(googleUser) {
+            console.log(`okk`);
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log(id_token, '<<<<<<<<<<');
+            // $.ajax({
+            //     url: 'https://localhost:3000/user/googleLogin',
+            //     method: 'POST',
+            //     data: {
+            //         googleToken: id_token
+            //     }
+            // })
+            // .done(response => {
+            //     localStorage.setItem('access_token', response)
+            //     mainDisplay()
+            // })
+            // .fail(error => {
+            //     console.log(error);
+            // })
         }
     }
 }
