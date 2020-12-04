@@ -25,7 +25,7 @@
                   Add Task
               </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" @click="logout"><GoogleLogin :params="params" :logoutButton=true>Logout</GoogleLogin></a>
+                <a class="dropdown-item" @click="logout"><GoogleLogin :params="params" :logoutButton=true class="btn btn-dark">Logout</GoogleLogin></a>
               </div>
             </li>
           </ul>
@@ -40,12 +40,18 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
     name: "navbar",
     data(){
       return {
-        
+        params: {
+              client_id: "413611539602-j0iauu3m1dm05kg57kk6sh5l6kq5o8rb.apps.googleusercontent.com"
+            },
       }
+    },
+    components:{
+      GoogleLogin
     },
     methods: {
         logout(){
