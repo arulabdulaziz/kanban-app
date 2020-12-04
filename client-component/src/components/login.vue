@@ -19,7 +19,7 @@
                     <input type="submit" name="" value="Login" class="btn btn-primary btn-block" id="btn-submit-login">
                   </div>
                 </form>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                 <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                 <button id="btn-register" class="btn btn-link" @click="registerPage">Don't Have Account? Let's Register</button>
                 <!-- form!!!-->
               </div>
@@ -32,15 +32,37 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
     name: 'login',
+    props: ['onFailure','logoutButton', 'onCurrentUser'],
     data(){
         return {
             email: '',
-            password: ''
+            password: '',
+            params: {
+              client_id: "413611539602-j0iauu3m1dm05kg57kk6sh5l6kq5o8rb.apps.googleusercontent.com"
+            },
+            renderParams: {
+                    width: 250,
+                    height: 50,
+                    longtitle: true
+            }
         }
     },
+    components: {
+      GoogleLogin
+    },
     methods: {
+      onSuccess(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        // console.log(id_token, '<<<<<<<<<< id token');
+        // console.log(googleUser, '<<<<<<<<<<<<<<<<<<<<<');
+
+        // This only gets the user information: id, name, imageUrl and email
+        // console.log(googleUser.getBasicProfile());
+        this.$emit('onSignIn', id_token)
+        },
         registerPage(){
             this.$emit('registerPage', 'Register Page')
         },
@@ -51,25 +73,6 @@ export default {
             }
             this.$emit('login', obj)
         },
-        onSignIn(googleUser) {
-            console.log(`okk`);
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token, '<<<<<<<<<<');
-            // $.ajax({
-            //     url: 'https://localhost:3000/user/googleLogin',
-            //     method: 'POST',
-            //     data: {
-            //         googleToken: id_token
-            //     }
-            // })
-            // .done(response => {
-            //     localStorage.setItem('access_token', response)
-            //     mainDisplay()
-            // })
-            // .fail(error => {
-            //     console.log(error);
-            // })
-        }
     }
 }
 </script>

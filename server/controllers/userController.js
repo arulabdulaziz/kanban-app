@@ -68,7 +68,7 @@ class UserController{
                     email : payload.email,
                     password: process.env.secretPassword
                 })
-                const token = Jwt.Sign({id: createUser.id, email:createUser.email, name: findUser.name})
+                const token = Jwt.Sign({id: createUser.id, email:createUser.email, name: createUser.name})
                 res.status(200).json(token)
             }
         } catch (error) {

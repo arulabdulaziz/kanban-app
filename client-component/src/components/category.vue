@@ -1,8 +1,8 @@
 <template>
   <!--Kanban Page-->
     <div class="col-md-3 p-2">
-        <div :class="background +' p-2'">
-            {{categoryTask}}
+        <div :class="background +' p-2 text-center'">
+            {{categoryTask.toUpperCase()}}
         </div>
         <div class="d-flex flex-column-reverse">
             <Task v-for="task in currentTask" :key="task.id" :task="task" @editTask="editTask" @deleteTask="deleteTask"></Task>

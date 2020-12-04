@@ -23,7 +23,7 @@
                       <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" @click="logout">Logout</a>
+                      <a class="dropdown-item" @click="logout"><GoogleLogin :params="params" :logoutButton=true>Logout</GoogleLogin></a>
                     </div>
                   </li>
                   <li class="nav-item">
