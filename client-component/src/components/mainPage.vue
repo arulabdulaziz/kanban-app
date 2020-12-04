@@ -3,8 +3,8 @@
       <Navbar @logout="logout"></Navbar>
       <div class="text-center">
       <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#form" id="btn-add">
-                Add Task
-            </button>
+            Add Task
+        </button>
       </div>
         <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -43,7 +43,7 @@
             </div>
         </div>
       </div>
-      <div class="container">
+      <div class="container" id="home">
         <div class="row mt-4 d-flex justify-content-around">
             <Category v-for="(category, index) in categories" :key="index" :categoryTask="category" :tasks="tasks"
             @editDisplay="editDisplay" @editTask="editTask" @deleteTask="deleteTask"></Category>
