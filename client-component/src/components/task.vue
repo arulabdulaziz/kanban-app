@@ -78,8 +78,8 @@ export default {
             $('#form-'+this.task.id).modal('hide')
         },
         deleteTask(){
-            console.log(this.task.id, '<<');
-            this.$emit('')
+            // console.log(this.task.id, '<<');
+            this.$emit('deleteTask', this.task.id)
         }
     }
 

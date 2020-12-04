@@ -5,7 +5,7 @@
             {{categoryTask}}
         </div>
         <div class="d-flex flex-column-reverse">
-            <Task v-for="task in currentTask" :key="task.id" :task="task" @editTask="editTask"></Task>
+            <Task v-for="task in currentTask" :key="task.id" :task="task" @editTask="editTask" @deleteTask="deleteTask"></Task>
         </div>
     </div>
           <!--Kanban Page-->
@@ -31,6 +31,9 @@ export default {
         editTask(obj){
             // console.log(`masuk dari category`, obj);
             this.$emit('editTask', obj)
+        },
+        deleteTask(id){
+            this.$emit('deleteTask', id)
         }
     },
     created(){

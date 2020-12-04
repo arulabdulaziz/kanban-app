@@ -32,7 +32,7 @@
       <div class="container">
         <div class="row mt-4 d-flex justify-content-around">
             <Category v-for="(category, index) in categories" :key="index" :categoryTask="category" :tasks="tasks"
-            @editDisplay="editDisplay" @editTask="editTask"></Category>
+            @editDisplay="editDisplay" @editTask="editTask" @deleteTask="deleteTask"></Category>
           </div>
       </div>
     
@@ -94,12 +94,16 @@ export default {
               this.taskEdit.id = value.data.id
           })
           .catch(error => {
-              swal("Error", `${error}`);
+              swal("Error", `${error.message}`);
           })
         },
         editTask(obj){
             // console.log(`masuk dari main page`, obj);
             this.$emit('editTask', obj)
+        },
+        deleteTask(id){
+          // console.log(id, 'dai main page');
+          this.$emit('deleteTask', id)
         }
     },
     created: function(){

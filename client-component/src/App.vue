@@ -10,7 +10,8 @@
          <MainPage @logout="logout"
          @addTask="addTask"
          :tasks="tasks"
-         @getAllTask="getAllTask" @editTask="editTask"></MainPage>
+         @getAllTask="getAllTask" @editTask="editTask"
+         @deleteTask="removeTask"></MainPage>
      </div>
   </div>
 </template>
@@ -139,8 +140,9 @@ export default {
         // console.log(`edit from app`);
       },
       removeTask(id){
+          console.log(`dari app vue`, id);
           axios({
-              url: `http://localhost:3000/${id}`,
+              url: `http://localhost:3000/tasks/${id}`,
               method: 'delete',
               headers: {
                 access_token: localStorage.getItem('access_token')
@@ -148,13 +150,14 @@ export default {
           })
           .then(value => {
               swal({
-                    text: "Your Task Has been updated",
+                    text: "Your Task Has been deleted",
                     title: "Success!!",
                     icon: "success",
                   });
+                  this.getAllTask()
           })
           .catch(error => {
-              swal("Error", `${error}`);
+              swal("Error", `${error.message}`);
           })
       },
       getAllTask(){
