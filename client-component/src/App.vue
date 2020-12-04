@@ -38,7 +38,7 @@ export default {
   methods: {
     onSignIn(id_token){
       axios({
-        url: 'http://localhost:3000/user/googleLogin',
+        url: 'https://tuyetuye-kanban-app.herokuapp.com/user/googleLogin',
         method: 'post',
         data: {
           googleToken: id_token
@@ -63,7 +63,7 @@ export default {
     },
     register(obj){
       axios({
-            url : "http://localhost:3000/user/register",
+            url : "https://tuyetuye-kanban-app.herokuapp.com/user/register",
             method : "post",
             data : obj
         })
@@ -87,7 +87,7 @@ export default {
     },
     login(obj){
       axios({
-            url : "http://localhost:3000/user/login",
+            url : "https://tuyetuye-kanban-app.herokuapp.com/user/login",
             method : "post",
             data : obj
         })
@@ -120,7 +120,7 @@ export default {
     },
     addTask(obj){
       axios({
-          url: "http://localhost:3000/tasks",
+          url: "https://tuyetuye-kanban-app.herokuapp.com/tasks",
           method: 'POST',
           data: obj,
           headers: {
@@ -142,7 +142,7 @@ export default {
     },
     editTask(obj){
       axios({
-          url: `http://localhost:3000/tasks/${obj.id}`,
+          url: `https://tuyetuye-kanban-app.herokuapp.com/tasks/${obj.id}`,
           method: 'PUT',
           data: obj,
           headers: {
@@ -165,7 +165,7 @@ export default {
     removeTask(id){
       console.log(`dari app vue`, id);
       axios({
-          url: `http://localhost:3000/tasks/${id}`,
+          url: `https://tuyetuye-kanban-app.herokuapp.com/tasks/${id}`,
           method: 'delete',
           headers: {
             access_token: localStorage.getItem('access_token')
@@ -185,7 +185,7 @@ export default {
     },
     getAllTask(){
       axios({
-          url: 'http://localhost:3000/tasks',
+          url: 'https://tuyetuye-kanban-app.herokuapp.com/tasks',
           method: 'GET',
           headers: {
               access_token: localStorage.getItem('access_token')

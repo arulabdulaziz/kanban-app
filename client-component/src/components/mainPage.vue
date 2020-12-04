@@ -96,7 +96,7 @@ export default {
         },
         editDisplay(id){
             axios({
-              url: `http://localhost:3000/${id}`,
+              url: `https://tuyetuye-kanban-app.herokuapp.com/${id}`,
               method: 'get',
               headers: {
                 access_token: localStorage.getItem('access_token')
