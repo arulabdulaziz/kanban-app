@@ -1,5 +1,4 @@
 const routes = require('express').Router()
-const router = require('./userRoute')
 const userRoutes = require('./userRoute') 
 const taskRoutes = require('./taskRoute')
 routes.get('/', (req, res) => {
