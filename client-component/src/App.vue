@@ -10,7 +10,7 @@
          <MainPage @logout="logout"
          @addTask="addTask"
          :tasks="tasks"
-         @getAllTask="getAllTask"></MainPage>
+         @getAllTask="getAllTask" @editTask="editTask"></MainPage>
      </div>
   </div>
 </template>
@@ -109,15 +109,16 @@ export default {
                     title: "Success!!",
                     icon: "success",
                   });
+                  this.getAllTask()
                   this.pageName = 'Main Page'
           })
           .catch(error => {
               swal("Error", `${error}`);
           })
       },
-      editTask(id, obj){
+      editTask(obj){
           axios({
-              url: `http://localhost:3000/tasks/${id}`,
+              url: `http://localhost:3000/tasks/${obj.id}`,
               method: 'PUT',
               data: obj,
               headers: {
@@ -125,16 +126,17 @@ export default {
               }
           })
           .then(value => {
-              swal({
-                    text: "Your Task Has been updated",
-                    title: "Success!!",
-                    icon: "success",
-                  });
-                  
+            swal({
+                text: "Your Task Has been updated",
+                title: "Success!!",
+                icon: "success",
+                });
+             this.getAllTask()
           })
           .catch(error => {
               swal("Error", `${error}`);
           })
+        // console.log(`edit from app`);
       },
       removeTask(id){
           axios({
@@ -173,7 +175,7 @@ export default {
           })
       }
   },
-  created: function(){
+  created(){
         if(localStorage.getItem('access_token')){
           this.getAllTask()
           this.pageName = 'Main Page'

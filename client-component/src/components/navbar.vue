@@ -44,7 +44,9 @@
 export default {
     name: "navbar",
     data(){
-
+      return {
+        
+      }
     },
     methods: {
         logout(){

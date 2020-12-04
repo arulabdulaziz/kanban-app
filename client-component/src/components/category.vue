@@ -1,91 +1,47 @@
 <template>
   <!--Kanban Page-->
-          <div class="container"> 
-              <div class="row mt-4 d-flex justify-content-around">
-                  <div class="col-md-3 p-2" v-if="categoryTask == 'backlog'">
-                      <div class="bg-danger p-2">
-                          Backlog
-                      </div>
-                      <div class="d-flex flex-column-reverse">
-                          <div class="card" v-for="(task, index) in tasks" :key="index">
-                            <div class="card-body">
-                              <h5 class="card-title">{{task.title}}</h5>
-                              <p class="card-text">{{task.description}}</p>
-                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form" @click="editDisplay(task.id)">
-                                Edit
-                                </button>
-                              <button class="btn-danger">Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                  </div>
-
-                  <div class="col-md-3 p-2" v-else-if="categoryTask == 'todo'">
-                <div class="bg-warning p-2">
-                    Todo
-                </div>
-                <div class="d-flex flex-column-reverse">
-                    <div class="card" v-for="(task, index) in tasks" :key="index">
-                    <div class="card-body">
-                        <h5 class="card-title">{{task.title}}</h5>
-                        <p class="card-text">{{task.description}}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form" @click="editDisplay(task.id)">
-                                Edit
-                        </button>
-                        <button class="btn-danger">Delete</button>
-                    </div>
-                    </div>
-                </div>
-                
-                </div>
-                <div class="col-md-3 p-2" v-else-if="categoryTask == 'doing'">
-                <div class="bg-primary p-2">
-                    Doing
-                </div>
-                <div class="d-flex flex-column-reverse">
-                    <div class="card" v-for="(task, index) in tasks" :key="index">
-                    <div class="card-body">
-                        <h5 class="card-title">{{task.title}}</h5>
-                        <p class="card-text">{{task.description}}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form" @click="editDisplay(task.id)">
-                                Edit
-                        </button>
-                        <button class="btn-danger">Delete</button>
-                    </div>
-                    </div>
-                </div>
-                
-                </div>
-                <div class="col-md-3 p-2" v-else-if="categoryTask == 'done'">
-                <div class="bg-success p-2">
-                    Done
-                </div>
-                <div class="d-flex flex-column-reverse">
-                    <div class="card" v-for="(task, index) in tasks" :key="index">
-                    <div class="card-danger">
-                        <h5 class="card-title">{{task.title}}</h5>
-                        <p class="card-text">{{task.description}}</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form" @click="editDisplay(task.id)">
-                                Edit
-                        </button>
-                        <button class="btn-danger">Delete</button>
-                    </div>
-                    </div>
-                </div>
-                
-                </div>
-              </div>
+    <div class="col-md-3 p-2">
+        <div :class="background +' p-2'">
+            {{categoryTask}}
         </div>
+        <div class="d-flex flex-column-reverse">
+            <Task v-for="task in currentTask" :key="task.id" :task="task" @editTask="editTask"></Task>
+        </div>
+    </div>
           <!--Kanban Page-->
 </template>
 
 <script>
+import Task from './task'
 export default {
     name: 'category',
     props: ['categoryTask', 'tasks'],
+    components: {
+        Task
+    },
+    data(){
+        return {
+            background: ''
+        }
+    },
     methods: {
         editDisplay(id){
             this.$emit('editDisplay', id)
+        },
+        editTask(obj){
+            // console.log(`masuk dari category`, obj);
+            this.$emit('editTask', obj)
+        }
+    },
+    created(){
+        if (this.categoryTask == 'backlog') {
+            this.background = 'bg-danger'
+        }else if(this.categoryTask == 'todo'){
+            this.background = 'bg-warning'
+        }else if(this.categoryTask == 'doing'){
+            this.background = 'bg-primary'
+        }else if(this.categoryTask == 'done'){
+            this.background = 'bg-success'
         }
     },
     computed: {

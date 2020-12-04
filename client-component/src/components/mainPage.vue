@@ -29,45 +29,13 @@
       <!-- <ul>
           <li v-for="(task, index) in tasks" :key="index">{{task}}</li>
       </ul> -->
-    <Category v-for="(category, index) in categories" :key="index" :categoryTask="category" :tasks="tasks"
-    @editDisplay="editDisplay"></Category>
-    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form @submit.prevent="editTask">
-              <div class="modal-body">
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="email" class="form-control" aria-describedby="emailHelp" v-model="taskEdit.title">
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <input type="textarea" class="form-control" v-model="taskEdit.description">
-                </div>
-                <div class="form-group">
-                  <label>Category</label>
-                  <select name="category" id="" class="form-control" v-model="taskEdit.category">
-                    <option value="disabled" disabled>--SELECT CATEGORY--</option>
-                    <option value="backlog">Backlog</option>
-                    <option value="todo">Todo</option>
-                    <option value="doing">Doing</option>
-                    <option value="done">Done</option>
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer border-top-0 d-flex justify-content-center">
-                <button type="submit" class="btn btn-success">Submit</button>
-              </div>
-            </form>
+      <div class="container">
+        <div class="row mt-4 d-flex justify-content-around">
+            <Category v-for="(category, index) in categories" :key="index" :categoryTask="category" :tasks="tasks"
+            @editDisplay="editDisplay" @editTask="editTask"></Category>
           </div>
-        </div>
       </div>
+    
   </div>
 </template>
 
@@ -75,7 +43,7 @@
 import Category from './category'
 import Navbar from './navbar'
 export default {
-    name: 'Main Page',
+    name: 'Main',
     components: {
         Navbar,
         Category
@@ -129,14 +97,9 @@ export default {
               swal("Error", `${error}`);
           })
         },
-        editTask(){
-            const id = this.editTask.id
-            const obj = {
-                title: this.editTask.title,
-                description: this.editTask.description,
-                category: this.editTask.category
-            }
-            this.$emit('editTask', id, obj)
+        editTask(obj){
+            // console.log(`masuk dari main page`, obj);
+            this.$emit('editTask', obj)
         }
     },
     created: function(){
